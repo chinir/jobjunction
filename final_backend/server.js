@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -9,7 +10,7 @@ const Bookings = require("./models/bookings");
 const UserPending = require("./models/userPending");
 const TaskerPending = require("./models/taskerPending");
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 const Incomingrequest = require("./models/incomingrequest");
 const UserCancel = require("./models/usercancel");
 const TaskerConfirm = require('./models/taskerconfirm')
@@ -36,13 +37,13 @@ const adminuserconfirm = require('./adminroutes/adminuserconfirm');
 const adminuserincompleted = require('./adminroutes/adminuserincompleted');
 const adminuserPending = require('./adminroutes/adminuserPending');
 const adminuserreviews = require('./adminroutes/adminuserreviews');
-require('dotenv').config();
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
 mongoose
-  .connect('mongodb://localhost:27017/', {
+  .connect(process.env.MONGODB_URI, {
   })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
@@ -165,8 +166,8 @@ app.post("/adminlogin", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (email != "jaybhatt260@gmail.com" || password != "admin123") {
-      return res.status(401).json({ message: "Invalid credentials" });
+    if (email != "nirajbhai@gmail.com" || password != "admin123") {
+      return res.status(401).json({ message: "Invali credentials" });
     }
     res.status(200).json({ message: "Login successful" });
   } catch (err) {
@@ -783,7 +784,7 @@ app.post("/couponavailability", async (req, res) => {
             taskdate: date,
           };
           const innerResponse = await fetch(
-            "http://localhost:4000/inner-request",
+            "https://jobjunction-gj6j.onrender.com/inner-request",
             {
               method: "POST",
               headers: {
@@ -1079,6 +1080,6 @@ app.use('/adminuserincompleted', adminuserincompleted);
 app.use('/adminuserPending', adminuserPending);
 app.use('/adminuserreviews', adminuserreviews);
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
