@@ -296,8 +296,8 @@ professional and did a fantastic job.</p>
       </div>
       <footer className="bg-body-tertiary text-center text-lg-start">
   <div className="text-center p-3 bg-dark">
-    © 2024 Copyright:
-    <a className="text-body" href="/"><span className='text-white'> JobJunction.com <br></br>  Contact Us: 8320265766</span></a>
+    © 2025 Copyright:
+    <a className="text-body" href="/"><span className='text-white'> JobJunction.com <br></br>  Contact Us: 9313262744</span></a>
   </div>
 </footer>
     </div>

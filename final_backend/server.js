@@ -41,6 +41,7 @@ const adminuserreviews = require('./adminroutes/adminuserreviews');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json())
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -786,7 +787,7 @@ app.post("/couponavailability", async (req, res) => {
             taskdate: date,
           };
           const innerResponse = await fetch(
-            "https://jobjunction-gj6j.onrender.com/inner-request",
+            "http://localhost:4000/inner-request",
             {
               method: "POST",
               headers: {
@@ -1085,3 +1086,7 @@ app.use('/adminuserreviews', adminuserreviews);
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+app.get('/', (req,res)=>{
+  res.send("work it");
+})
